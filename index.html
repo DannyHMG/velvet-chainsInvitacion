@@ -1,0 +1,942 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#100812">
+
+<title>Velvet Chains | Tu hilo te trajo aquí</title>
+
+<style>
+:root {
+    --fondo: #100812;
+    --rosa: #f0a6c1;
+    --dorado: #f0d0a3;
+    --texto: #fff0f5;
+    --suave: #c8a9bb;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    min-height: 100%;
+    background: var(--fondo);
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    overflow-x: hidden;
+    color: var(--texto);
+    font-family: Georgia, "Times New Roman", serif;
+    background:
+        radial-gradient(
+            ellipse at 20% 15%,
+            #512039 0%,
+            transparent 37%
+        ),
+        radial-gradient(
+            ellipse at 85% 85%,
+            #402039 0%,
+            transparent 38%
+        ),
+        #100812;
+}
+
+/* ESTRELLAS ANIMADAS */
+
+.estrellas {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.7;
+    background-image:
+        radial-gradient(
+            circle,
+            #ffe3ee 1px,
+            transparent 1.5px
+        ),
+        radial-gradient(
+            circle,
+            #edb5ca 1px,
+            transparent 1.5px
+        );
+    background-size:
+        95px 95px,
+        147px 147px;
+    background-position:
+        11px 17px,
+        66px 45px;
+    animation: estrellas 25s linear infinite;
+}
+
+@keyframes estrellas {
+    to {
+        background-position:
+            106px 112px,
+            213px 192px;
+    }
+}
+
+/* NAVEGACIÓN SIN JAVASCRIPT */
+
+.control {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    opacity: 0;
+    overflow: hidden;
+}
+
+.pantalla {
+    display: none;
+    min-height: 100vh;
+    min-height: 100svh;
+    position: relative;
+    align-items: center;
+    justify-content: center;
+    padding: 34px 18px 44px;
+}
+
+#paso1:checked ~ main #inicio,
+#paso2:checked ~ main #encuentro,
+#paso3:checked ~ main #actividades,
+#paso4:checked ~ main #historia,
+#paso5:checked ~ main #unirse {
+    display: flex;
+}
+
+/* TARJETAS */
+
+.tarjeta {
+    width: min(100%, 570px);
+    position: relative;
+    overflow: hidden;
+    text-align: center;
+    padding: 40px 25px 34px;
+    border: 1px solid #d99fba66;
+    border-radius: 28px;
+    background:
+        linear-gradient(
+            155deg,
+            #311629e8,
+            #170e1af5 65%,
+            #301626eb
+        );
+    box-shadow:
+        0 25px 80px #0008,
+        0 0 70px #e8669b16;
+    animation: aparecer 0.7s ease both;
+}
+
+.tarjeta::before,
+.tarjeta::after {
+    content: "✦";
+    position: absolute;
+    color: #e5b6c9;
+    opacity: 0.6;
+    font-size: 18px;
+}
+
+.tarjeta::before {
+    left: 19px;
+    top: 18px;
+}
+
+.tarjeta::after {
+    right: 19px;
+    bottom: 18px;
+}
+
+@keyframes aparecer {
+    from {
+        opacity: 0;
+        transform:
+            translateY(20px)
+            scale(0.98);
+    }
+    to {
+        opacity: 1;
+        transform:
+            translateY(0)
+            scale(1);
+    }
+}
+
+/* TEXTOS */
+
+.etiqueta {
+    font: 600 11px/1.5 system-ui, sans-serif;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--dorado);
+    margin: 0 0 19px;
+}
+
+.marca {
+    font-size: clamp(40px, 11vw, 73px);
+    font-weight: 400;
+    line-height: 0.99;
+    letter-spacing: -2px;
+    margin: 0;
+    text-shadow: 0 0 30px #e38db755;
+}
+
+.marca em,
+h2 em {
+    color: var(--rosa);
+    font-style: italic;
+}
+
+.japones {
+    font-size: 13px;
+    letter-spacing: 4px;
+    color: var(--dorado);
+    margin: 17px 0;
+}
+
+h2 {
+    font-size: clamp(29px, 8vw, 45px);
+    line-height: 1.13;
+    font-weight: 400;
+    margin: 8px 0 18px;
+}
+
+.texto {
+    font-size: 16px;
+    line-height: 1.85;
+    color: #f1dbe6;
+    max-width: 430px;
+    margin: 0 auto 19px;
+}
+
+.texto strong {
+    color: #fff4f7;
+}
+
+.separador {
+    height: 1px;
+    max-width: 230px;
+    margin: 24px auto;
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            #c881a6,
+            transparent
+        );
+}
+
+/* HILO ROJO */
+
+.hilo {
+    height: 86px;
+    margin: 12px auto 8px;
+    max-width: 300px;
+}
+
+.hilo svg {
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+}
+
+.hilo path {
+    stroke: #ed6088;
+    stroke-width: 2.3;
+    fill: none;
+    stroke-linecap: round;
+    filter: drop-shadow(
+        0 0 5px #d83f79
+    );
+    stroke-dasharray: 430;
+    stroke-dashoffset: 430;
+    animation: dibujar 3s ease forwards;
+}
+
+@keyframes dibujar {
+    to {
+        stroke-dashoffset: 0;
+    }
+}
+
+/* CORAZÓN */
+
+.corazon {
+    font-size: 41px;
+    display: block;
+    margin: 13px 0;
+    color: var(--rosa);
+    animation: latido 2s ease-in-out infinite;
+    text-shadow: 0 0 25px #e96d9b;
+}
+
+@keyframes latido {
+    50% {
+        transform: scale(1.13);
+    }
+}
+
+/* BOTONES */
+
+.boton {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 52px;
+    padding: 13px 25px;
+    margin: 14px 4px 0;
+    border-radius: 100px;
+    cursor: pointer;
+    background:
+        linear-gradient(
+            100deg,
+            #edabc6,
+            #df7eaa
+        );
+    color: #2b1021;
+    font: 700 13px/1.3 system-ui, sans-serif;
+    letter-spacing: 0.35px;
+    box-shadow: 0 7px 24px #d85a8c55;
+    transition:
+        transform 0.2s,
+        box-shadow 0.2s;
+    user-select: none;
+}
+
+.boton:active {
+    transform: scale(0.96);
+}
+
+.boton.secundario {
+    background: transparent;
+    border: 1px solid #d99fba88;
+    color: var(--texto);
+    box-shadow: none;
+}
+
+/* INDICADORES DE PANTALLA */
+
+.progreso {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+    margin-top: 26px;
+}
+
+.progreso i {
+    width: 6px;
+    height: 6px;
+    background: #87536e;
+    border-radius: 10px;
+}
+
+.progreso i.activo {
+    width: 24px;
+    background: #f3b5ce;
+}
+
+/* ACTIVIDADES */
+
+.actividades {
+    display: grid;
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+    gap: 12px;
+    margin: 25px 0 10px;
+    text-align: left;
+}
+
+.actividad {
+    border: 1px solid #d8a3bb4d;
+    background: #ffffff09;
+    border-radius: 17px;
+    padding: 17px 13px;
+    min-height: 123px;
+}
+
+.actividad .emoji {
+    font-size: 27px;
+    display: block;
+    margin-bottom: 9px;
+}
+
+.actividad b {
+    display: block;
+    color: #f9d5e4;
+    font: 700 13px system-ui, sans-serif;
+}
+
+.actividad .detalle {
+    display: block;
+    color: #cbb0be;
+    font: 12px/1.55 system-ui, sans-serif;
+    margin-top: 6px;
+}
+
+/* FRASES */
+
+.frase {
+    border-left: 2px solid var(--rosa);
+    text-align: left;
+    padding: 8px 0 8px 18px;
+    margin: 25px auto;
+    max-width: 370px;
+    color: #f2dce7;
+    font-size: 18px;
+    line-height: 1.6;
+    font-style: italic;
+}
+
+/* PASOS PARA UNIRSE */
+
+.pasos {
+    text-align: left;
+    margin: 22px auto;
+    max-width: 350px;
+}
+
+.paso {
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+    margin: 15px 0;
+    color: #f3dce7;
+    font: 14px/1.65 system-ui, sans-serif;
+}
+
+.numero {
+    display: grid;
+    place-items: center;
+    flex: none;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border: 1px solid #e2a4c2;
+    color: var(--rosa);
+    font-size: 13px;
+}
+
+.comentario {
+    margin: 24px auto 7px;
+    padding: 18px 15px;
+    border: 1px solid #eeb5cd88;
+    background: #ef99bf12;
+    border-radius: 17px;
+    font: 700 clamp(21px, 6vw, 30px)/1.3
+        system-ui, sans-serif;
+    color: #ffe7f0;
+    letter-spacing: 1px;
+}
+
+.pie {
+    font: 11px/1.7 system-ui, sans-serif;
+    color: #c49aae;
+    letter-spacing: 1.2px;
+    margin: 20px 0 0;
+}
+
+.sello {
+    width: 104px;
+    height: 104px;
+    margin: 9px auto 23px;
+    border: 1px solid #d98dab;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    font-size: 44px;
+    box-shadow:
+        inset 0 0 25px #e780a533,
+        0 0 40px #e780a522;
+}
+
+/* DECORACIONES FLOTANTES */
+
+.flotante {
+    position: absolute;
+    pointer-events: none;
+    color: #eab4c9;
+    opacity: 0.23;
+    font-size: 32px;
+    animation: flotar 5s ease-in-out infinite;
+}
+
+.flotante.uno {
+    left: 5%;
+    top: 10%;
+}
+
+.flotante.dos {
+    right: 6%;
+    bottom: 11%;
+    animation-delay: 1.5s;
+}
+
+@keyframes flotar {
+    50% {
+        transform:
+            translateY(-13px)
+            rotate(15deg);
+    }
+}
+
+@media (max-width: 380px) {
+    .tarjeta {
+        padding: 32px 17px 26px;
+    }
+
+    .texto {
+        font-size: 15px;
+    }
+
+    .actividad {
+        padding: 13px 10px;
+        min-height: 115px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation: none !important;
+        transition: none !important;
+    }
+
+    .hilo path {
+        stroke-dashoffset: 0;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- CONTROLES PARA CAMBIAR DE PANTALLA -->
+
+<input
+    class="control"
+    type="radio"
+    name="pagina"
+    id="paso1"
+    checked
+>
+
+<input
+    class="control"
+    type="radio"
+    name="pagina"
+    id="paso2"
+>
+
+<input
+    class="control"
+    type="radio"
+    name="pagina"
+    id="paso3"
+>
+
+<input
+    class="control"
+    type="radio"
+    name="pagina"
+    id="paso4"
+>
+
+<input
+    class="control"
+    type="radio"
+    name="pagina"
+    id="paso5"
+>
+
+<div class="estrellas" aria-hidden="true"></div>
+
+<main>
+
+<!-- PANTALLA 1: INVITACIÓN -->
+
+<section class="pantalla" id="inicio">
+
+    <div class="tarjeta">
+
+        <span class="flotante uno">✧</span>
+        <span class="flotante dos">✦</span>
+
+        <p class="etiqueta">
+            Una invitación del destino
+        </p>
+
+        <h1 class="marca">
+            Velvet<br>
+            <em>Chains</em>
+        </h1>
+
+        <p class="japones">
+            赤い糸 · AKAI ITO
+        </p>
+
+        <div class="hilo">
+
+            <svg
+                viewBox="0 0 300 90"
+                aria-hidden="true"
+            >
+                <path
+                    d="
+                    M10 45
+                    C50 -5 90 95 135 45
+                    S215 -5 252 45
+                    S275 80 290 45
+                    "
+                />
+            </svg>
+
+        </div>
+
+        <p class="texto">
+            Entre miles de caminos,
+            un pequeño hilo rojo
+            te trajo hasta aquí…
+            <br>
+            <strong>
+                ¿Y si no fue casualidad?
+            </strong>
+        </p>
+
+        <label class="boton" for="paso2">
+            Tira del hilo ✧
+        </label>
+
+        <div class="progreso">
+            <i class="activo"></i>
+            <i></i>
+            <i></i>
+            <i></i>
+            <i></i>
+        </div>
+
+    </div>
+
+</section>
+
+<!-- PANTALLA 2: ENCUENTRO -->
+
+<section class="pantalla" id="encuentro">
+
+    <div class="tarjeta">
+
+        <p class="etiqueta">
+            Capítulo I · El encuentro
+        </p>
+
+        <span class="corazon">♡</span>
+
+        <h2>
+            Quizá aquí encuentres<br>
+            <em>tu lugar.</em>
+        </h2>
+
+        <p class="texto">
+            No necesitas llegar con
+            una historia perfecta,
+            ni conocer a nadie
+            de antemano.
+        </p>
+
+        <p class="texto">
+            En <strong>Velvet Chains</strong>
+            queremos crear un rincón
+            donde puedas reír sin pena,
+            compartir tus locuras
+            y convertir desconocidos
+            en personas especiales.
+        </p>
+
+        <div class="frase">
+            «A veces, los mejores recuerdos
+            empiezan con un simple hola».
+        </div>
+
+        <label
+            class="boton secundario"
+            for="paso1"
+        >
+            ← Volver
+        </label>
+
+        <label class="boton" for="paso3">
+            ¿Qué hay dentro? ✦
+        </label>
+
+        <div class="progreso">
+            <i></i>
+            <i class="activo"></i>
+            <i></i>
+            <i></i>
+            <i></i>
+        </div>
+
+    </div>
+
+</section>
+
+<!-- PANTALLA 3: ACTIVIDADES -->
+
+<section class="pantalla" id="actividades">
+
+    <div class="tarjeta">
+
+        <p class="etiqueta">
+            Capítulo II · Lo que nos espera
+        </p>
+
+        <h2>
+            Mucho más que<br>
+            <em>un simple grupo.</em>
+        </h2>
+
+        <p class="texto">
+            Queremos que cada día
+            tenga una razón para volver.
+            Estas son algunas de las
+            cosas que nos gustaría
+            compartir contigo:
+        </p>
+
+        <div class="actividades">
+
+            <div class="actividad">
+                <span class="emoji">🎲</span>
+                <b>Dinámicas y juegos</b>
+                <span class="detalle">
+                    Actividades para romper
+                    el hielo y reír juntos.
+                </span>
+            </div>
+
+            <div class="actividad">
+                <span class="emoji">🎭</span>
+                <b>Retos y sorpresas</b>
+                <span class="detalle">
+                    Momentos inesperados
+                    y misiones divertidas.
+                </span>
+            </div>
+
+            <div class="actividad">
+                <span class="emoji">💌</span>
+                <b>Lazos especiales</b>
+                <span class="detalle">
+                    Conoce personas y crea
+                    nuevas conexiones.
+                </span>
+            </div>
+
+            <div class="actividad">
+                <span class="emoji">🌙</span>
+                <b>Charlas y compañía</b>
+                <span class="detalle">
+                    Un espacio para compartir
+                    y sentirte parte.
+                </span>
+            </div>
+
+        </div>
+
+        <p class="pie">
+            Y esto es solo el comienzo…
+        </p>
+
+        <label
+            class="boton secundario"
+            for="paso2"
+        >
+            ← Volver
+        </label>
+
+        <label class="boton" for="paso4">
+            Hay algo más para ti →
+        </label>
+
+        <div class="progreso">
+            <i></i>
+            <i></i>
+            <i class="activo"></i>
+            <i></i>
+            <i></i>
+        </div>
+
+    </div>
+
+</section>
+
+<!-- PANTALLA 4: TU HISTORIA -->
+
+<section class="pantalla" id="historia">
+
+    <div class="tarjeta">
+
+        <p class="etiqueta">
+            Capítulo III · Tu historia
+        </p>
+
+        <div class="sello">
+            🧵
+        </div>
+
+        <h2>
+            No buscamos números.<br>
+            <em>Buscamos historias.</em>
+        </h2>
+
+        <p class="texto">
+            Personas que tengan ganas
+            de participar, convivir,
+            divertirse y aportar
+            su propia chispa.
+        </p>
+
+        <p class="texto">
+            No importa si eres tímido
+            al principio o si hablas
+            hasta por los codos.
+            <strong>
+                Tu forma de ser también
+                tiene un lugar aquí.
+            </strong>
+        </p>
+
+        <div class="separador"></div>
+
+        <p class="texto">
+            El team apenas comienza…
+            y eso significa que
+            <strong>
+                tú puedes ser parte
+                de sus primeros recuerdos.
+            </strong>
+        </p>
+
+        <label
+            class="boton secundario"
+            for="paso3"
+        >
+            ← Volver
+        </label>
+
+        <label class="boton" for="paso5">
+            Quiero descubrir cómo unirme ♡
+        </label>
+
+        <div class="progreso">
+            <i></i>
+            <i></i>
+            <i></i>
+            <i class="activo"></i>
+            <i></i>
+        </div>
+
+    </div>
+
+</section>
+
+<!-- PANTALLA 5: INVITACIÓN FINAL -->
+
+<section class="pantalla" id="unirse">
+
+    <div class="tarjeta">
+
+        <p class="etiqueta">
+            El último hilo · Tu decisión
+        </p>
+
+        <span class="corazon">
+            ♥
+        </span>
+
+        <h2>
+            ¿Te animas a ser<br>
+            <em>parte de Velvet Chains?</em>
+        </h2>
+
+        <p class="texto">
+            Si llegaste hasta aquí,
+            tal vez este hilo rojo
+            estaba esperando por ti.
+        </p>
+
+        <div class="pasos">
+
+            <div class="paso">
+                <span class="numero">1</span>
+                <span>
+                    Regresa al
+                    <strong>video de TikTok</strong>
+                    donde encontraste
+                    esta invitación.
+                </span>
+            </div>
+
+            <div class="paso">
+                <span class="numero">2</span>
+                <span>
+                    Escribe en los
+                    <strong>comentarios</strong>
+                    que quieres unirte.
+                </span>
+            </div>
+
+            <div class="paso">
+                <span class="numero">3</span>
+                <span>
+                    Estate pendiente de
+                    nuestra respuesta para
+                    conocer los siguientes pasos.
+                </span>
+            </div>
+
+        </div>
+
+        <div class="comentario">
+            💌 COMENTA: «ME UNO»
+        </div>
+
+        <p class="texto">
+            Tu próxima amistad,
+            tu próxima carcajada
+            o tu próxima historia…
+            podrían estar a un
+            comentario de distancia.
+        </p>
+
+        <label
+            class="boton secundario"
+            for="paso1"
+        >
+            ↺ Volver al inicio
+        </label>
+
+        <p class="pie">
+            VELVET CHAINS · DONDE COMIENZAN LOS LAZOS
+        </p>
+
+        <div class="progreso">
+            <i></i>
+            <i></i>
+            <i></i>
+            <i></i>
+            <i class="activo"></i>
+        </div>
+
+    </div>
+
+</section>
+
+</main>
+
+</body>
+</html>
